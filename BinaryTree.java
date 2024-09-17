@@ -1,6 +1,6 @@
 
 /*
- * *** PLACE YOUR NAME / SECTION HERE ***
+ * *** Jai Fischer / COMP 272 001 ***
  *
  * Homework # 2 (Programming Assignment). This Java class defines a few basic
  * manipulation operations of a binary trees.
@@ -224,7 +224,9 @@ public class BinaryTree {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
-
+        if(node.left != null) replaceValueHelper(node.left, oldVal, newVal);
+        if(node.data == oldVal) node.data = newVal;
+        if(node.right != null) replaceValueHelper(node.right, oldVal, newVal);
     }
 
 
@@ -246,8 +248,10 @@ public class BinaryTree {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
-
-        return Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE;
+        if(node == null) return min;
+        min = node.data;
+        return Math.min(Math.min(min, findMinHelper(node.left)),Math.min(min, findMinHelper(node.right)));
     }
 
 
@@ -270,9 +274,10 @@ public class BinaryTree {
         // BINARY TREE (WHICH IS BASED ON RECURSION)
 
         // return -1; // RECALL, IF TREE IS EMPTY, RETURN -1
-
-
-        return -1;
+        int i = 0;
+        if(node == null) return i;
+        if(node.data > val) i++;
+        return i + nodesGTHelper(node.left,val) + nodesGTHelper(node.right,val);
     }
 
 
@@ -310,7 +315,10 @@ public class BinaryTree {
         // RECALL, IF THE TREE IS EMPTY, RETURN 0 FOR BOTH THE SUM AND
         // COUNT LOCATIONS IN THE RETURNED ARRAY AS SHOWN BELOW, ELSE
         // THE 'SUM' IS RETURNED IN INDEX LOCATION 0, AND COUNT IS LOCATION 1
-
-        return new int[]{0, 0};
+        int[] a = new int[]{0,0};
+        if (n == null) return a;
+        a[0] += n.data + averageHelper(n.left)[0] + averageHelper(n.right)[0];
+        a[1] += 1 + averageHelper(n.left)[1] + averageHelper(n.right)[1];
+        return a;
     }
 }

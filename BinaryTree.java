@@ -224,9 +224,9 @@ public class BinaryTree {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
-        if(node.left != null) replaceValueHelper(node.left, oldVal, newVal);
-        if(node.data == oldVal) node.data = newVal;
-        if(node.right != null) replaceValueHelper(node.right, oldVal, newVal);
+        if(node.left != null) replaceValueHelper(node.left, oldVal, newVal); // Checks if left node exists
+        if(node.data == oldVal) node.data = newVal; // If the old value is found it will change it to the new value
+        if(node.right != null) replaceValueHelper(node.right, oldVal, newVal); // Checks if right node exists
     }
 
 
@@ -248,10 +248,10 @@ public class BinaryTree {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
-        int min = Integer.MAX_VALUE;
-        if(node == null) return min;
-        min = node.data;
-        return Math.min(Math.min(min, findMinHelper(node.left)),Math.min(min, findMinHelper(node.right)));
+        int min = Integer.MAX_VALUE; // Makes minimum value Integer.MAX_VALUE
+        if(node == null) return min; // Returns min if node current node doesn't exist
+        min = node.data; // Makes the minimum the current nodes data value
+        return Math.min(Math.min(min, findMinHelper(node.left)),Math.min(min, findMinHelper(node.right))); // Returns the minimum value between the left, right, and current node
     }
 
 
@@ -274,10 +274,12 @@ public class BinaryTree {
         // BINARY TREE (WHICH IS BASED ON RECURSION)
 
         // return -1; // RECALL, IF TREE IS EMPTY, RETURN -1
-        int i = 0;
-        if(node == null) return i;
-        if(node.data > val) i++;
-        return i + nodesGTHelper(node.left,val) + nodesGTHelper(node.right,val);
+        // I am not sure if this is a typo or not but the instructions above
+        // state that if the tree is empty to return 0, so that is what I did
+        int i = 0; // Variable i acts as the counter for how many nodes have a value greater than val
+        if(node == null) return i; // returns i if current node doesn't exist
+        if(node.data > val) i++; // Increments i when the current nodes value is greater than val
+        return i + nodesGTHelper(node.left,val) + nodesGTHelper(node.right,val); // Returns the i values of the left and right and current node
     }
 
 
@@ -315,10 +317,10 @@ public class BinaryTree {
         // RECALL, IF THE TREE IS EMPTY, RETURN 0 FOR BOTH THE SUM AND
         // COUNT LOCATIONS IN THE RETURNED ARRAY AS SHOWN BELOW, ELSE
         // THE 'SUM' IS RETURNED IN INDEX LOCATION 0, AND COUNT IS LOCATION 1
-        int[] a = new int[]{0,0};
-        if (n == null) return a;
-        a[0] += n.data + averageHelper(n.left)[0] + averageHelper(n.right)[0];
-        a[1] += 1 + averageHelper(n.left)[1] + averageHelper(n.right)[1];
-        return a;
+        int[] a = new int[]{0,0}; // Array a[] keeps track of sum and count
+        if (n == null) return a; // Returns a[] if the current node doesn't exist
+        a[0] += n.data + averageHelper(n.left)[0] + averageHelper(n.right)[0]; // Adds the sums of the left, right and current nodes data values
+        a[1] += 1 + averageHelper(n.left)[1] + averageHelper(n.right)[1]; // Adds the count of nodes together
+        return a; // Returns the array with the sum of node data values and count of nodes
     }
 }
